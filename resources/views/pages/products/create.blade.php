@@ -49,7 +49,7 @@
                 name="quantity" 
                 value="{{ old('quantity') }}"
                 class="form-control @error('quantity') is-invalid @enderror"/>
-        @error('type') <div class="text-muted">{{ $message }}</div> @enderror
+        @error('quantity') <div class="text-muted">{{ $message }}</div> @enderror
       </div>
 
       <div class="form-group">

@@ -27,7 +27,7 @@
                   <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->emaik }}</td>
+                    <td>{{ $item->email }}</td>
                     <td>{{ $item->number }}</td>
                     <td>${{ $item->transaction_total }}</td>
                     <td>
@@ -36,7 +36,7 @@
                       @elseif($item->transaction_status == 'SUCCESS')
                         <span class="badge badge-success">
                       @elseif($item->transaction_status == 'FAILED')
-                        <span class="badge badge-info">
+                        <span class="badge badge-secondary">
                       @else
                         <span>
                       @endif
@@ -44,14 +44,28 @@
                         </span>
                     </td>
                     <td>
-                      <a href="{{ route('products.edit', $item->id)  }}" class="btn btn-primary btn-sm">
-                      {{-- <a href="#" class="btn btn-primary btn-sm"> --}}
+                      @if($item->transaction_status == 'PENDING')
+                        {{-- <a href="{{ route('transactions.status', $item->id) }} ? status=SUCCESS" class="btn btn-success btn-sm">
+                          <i class="fa fa-check"></i>
+                        </a>
+                        <a href="{{ route('transactions.status', $item->id) }} ? status=FAILED" class="btn btn-warning btn-sm">
+                          <i class="fa fa-times"></i>
+                        </a> --}}
+                      @endif
+                      <a href="#mymodal"
+                        data-remote="{{ route('transactions.show', $item->id) }}"
+                        data-toggle="modal"
+                        data-target="#mymodal"
+                        data-title="Detail Transaksi {{ $item->uuid }}"
+                        class="btn btn-info btn-sm">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      <a href="{{ route('transactions.edit', $item->id) }}" class="btn btn-primary btn-sm">
                         <i class="fa fa-pencil"></i>
                       </a>
-                      <form action="{{ route('products.destroy', $item->id) }}" 
+                      <form action="{{ route('transactions.destroy', $item->id) }}" 
                             method="post"
                             class="d-inline">
-                      {{-- <form action="#" method="post" class="d-inline"> --}}
                         @csrf
                         @method('delete')
                         <button class="btn btn-danger btn-sm">

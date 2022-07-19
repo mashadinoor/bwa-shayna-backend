@@ -119,7 +119,7 @@ class TransactionController extends Controller
     $item = Transaction::findOrFail($id);
     $item->delete();
 
-    return redirect()->route('transaction.index');
+    return redirect()->route('transactions.index');
   }
 
   public function setStatus(Request $request, $id)
@@ -133,6 +133,6 @@ class TransactionController extends Controller
 
     $item->save();
 
-    return redirect()->route('transaction.index');
+    return redirect()->route('transactions.index');
   }
 }

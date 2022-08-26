@@ -16,7 +16,7 @@ class ProductController extends Controller
     $slug = $request->input('slug');
     $type = $request->input('type');
     $price_from = $request->input('price_from');
-    $price_to = $request->input('name');
+    $price_to = $request->input('price_to');
 
     if ($id) {
       $product = Product::with('galleries')->find($id);
